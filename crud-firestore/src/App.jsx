@@ -4,6 +4,8 @@ import { firebase } from './firebase'
 function App() {
   const [ tareas, setTareas ] = useState([])
   const [ tarea, setTarea ] = useState('') 
+  const [ modoEdition, setModoEdition ] = useState(false)
+  const [ id, setId ] = useState('') 
 
   React.useEffect( () => {
     const obtenerDatos = async () => {
@@ -57,6 +59,35 @@ function App() {
     }
   }
 
+  const activarEdicion = (item) => {
+    setModoEdition(true)
+    setTarea(item.name)
+    setId(item.id)
+  }
+
+  const editar =  async (e) => {
+    e.preventDefault()
+    if(!tarea.trim()){
+      console.log('esta vacio')
+      return
+    }
+    try {
+      const db = firebase.firestore()
+      await db.collection('tareas').doc(id).update({
+        name: tarea
+      })
+      const arrayEditado = tareas.map( item => (
+        item.id === id ? {id: item.id, fecha: item.fecha, name: tarea} : item
+      ))
+      setTareas(arrayEditado)
+      setModoEdition(false)
+      setTarea('')
+      setId('')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className="container mt-3">
       <div className="row">
@@ -74,6 +105,7 @@ function App() {
                   </button>
                   <button 
                     className="btn btn-warning btn-sm float-right mr-2"
+                    onClick={ () => activarEdicion(item)}
                   >
                     Editar
                   </button>
@@ -83,8 +115,10 @@ function App() {
           </ul>
         </div>
         <div className="col-md-6">
-          <h3>Formulario</h3>
-          <form onSubmit={agregar}>
+          <h3>
+            {modoEdition ? 'Editar tarea': 'Agregar Tarea'}
+          </h3>
+          <form onSubmit={modoEdition ? editar : agregar}>
             <input
               type="text"
               placeholder="Ingrese tarea"
@@ -93,10 +127,14 @@ function App() {
               value={tarea}
             />
             <button 
-            className="btn btn-dark btn-block"
+            className={
+              modoEdition ? 'btn btn-warning btn-block' : 'btn btn-dark btn-block'
+            }
             type="submit"
             >
-              Agregar
+              {
+                modoEdition ? 'Editar' : 'Agregar'
+              }
             </button>
           </form>
         </div>
