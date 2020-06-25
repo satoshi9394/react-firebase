@@ -3,18 +3,19 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 //components
 import Navbar from './components/Navbar'
+import Login from './components/Login';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="container">
         <Navbar/>
         <Switch>
           <Route path="/" exact>
             home...
           </Route>
           <Route path="/login">
-            login...
+            <Login/>
           </Route>
           <Route path="/admin">
             admin...
