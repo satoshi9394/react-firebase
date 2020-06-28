@@ -1,8 +1,10 @@
 import React, { useState, useCallback} from 'react'
+import { withRouter } from 'react-router-dom'
+
 import { auth, db }  from '../firebase'
 
 
-const Login = () => {
+const Login = (props) => {
 
   const [email, setEmail] = useState('')
   const [pass, setPass ] = useState('')
@@ -28,10 +30,34 @@ const Login = () => {
 
     if(esRegistro){
       registrar()
+    }else{
+      login()
     }
 
 
   }
+
+  const login = useCallback( async() => {
+    try {
+      const res = await auth.signInWithEmailAndPassword(email, pass)
+      console.log(res.user)
+      setEmail('')
+      setPass('')
+      setError(null)
+      props.history.push('/admin')
+    } catch (error) {
+      console.error(error)
+      if(error.code === 'auth/invalid-email'){
+        setError('Email no valido...')
+      }
+      if(error.code === 'auth/user-not-found'){
+        setError('Email no registrado...')
+      }
+      if(error.code === 'auth/wrong-password'){
+        setError('Email o password no valido...')
+      }
+    }
+  },[email, pass, props.history])
 
   const registrar = useCallback( async() => {
     try {
@@ -44,6 +70,7 @@ const Login = () => {
       setPass('')
       setError(null)
       console.info(res.user)
+      props.history.push('/admin')
     } catch (error) {
       console.error(error)
       if(error.code === 'auth/invalid-email'){
@@ -55,7 +82,7 @@ const Login = () => {
       
     }
 
-  }, [email, pass])
+  }, [email, pass, props.history])
 
 
     return (
@@ -114,4 +141,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default withRouter(Login)
