@@ -4,6 +4,9 @@ import { withRouter } from 'react-router-dom'
 //firebase
 import {auth} from '../firebase'
 
+//components
+import Firestore from './Firestore'
+
 const Admin = (props) => {
 
   const [ user, setUser] = useState(null)
@@ -24,7 +27,7 @@ const Admin = (props) => {
       {
         user && 
         (
-          <h3>{user.email}</h3>
+          <Firestore user={user}/>
         )
       }
     </div>

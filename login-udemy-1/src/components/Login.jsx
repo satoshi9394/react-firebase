@@ -6,7 +6,7 @@ import { auth, db }  from '../firebase'
 
 const Login = (props) => {
 
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('pruebas@prueba.com')
   const [pass, setPass ] = useState('')
   const [error, setError] = useState(null)
   const [ esRegistro, setEsRegistro ] = useState(true)
@@ -65,6 +65,10 @@ const Login = (props) => {
       await db.collection('usuarios').doc(res.user.email).set({
         email: res.user.email,
         uid: res.user.uid
+      })
+      await db.collection(res.user.uid).add({
+        name: 'Tarea de ejemplo',
+        fecha: Date.now()
       })
       setEmail('')
       setPass('')
