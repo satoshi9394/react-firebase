@@ -6,7 +6,7 @@ import { auth, db }  from '../firebase'
 
 const Login = (props) => {
 
-  const [email, setEmail] = useState('pruebas@prueba.com')
+  const [email, setEmail] = useState('')
   const [pass, setPass ] = useState('')
   const [error, setError] = useState(null)
   const [ esRegistro, setEsRegistro ] = useState(true)
@@ -138,6 +138,18 @@ const Login = (props) => {
                               esRegistro ? 'Ya estas registrado?' : 'no tienes cuenta?'
                             }
                         </button>
+                        {
+                          !esRegistro ? (
+                            <button 
+                            className="btn btn-sm mt-2 btn-danger"
+                            type="button"
+                            onClick={()=> props.history.push('/reset')}
+                            >
+                            Recuperar Contraseña
+                            </button>
+                          ) : null
+                        }
+                        
                     </form>
                 </div>
             </div>

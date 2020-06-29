@@ -5,9 +5,11 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Login from './components/Login';
 import Admin from './components/Admin';
+import Reset from './components/Reset';
 
 //firebase 
 import {auth} from './firebase'
+
 
 function App() {
   const [ firebaseUser, setFirebaseUser] = useState(false)
@@ -37,6 +39,9 @@ function App() {
           </Route>
           <Route path="/admin">
             <Admin/>
+          </Route>
+          <Route path="/reset">
+            <Reset/>
           </Route>
         </Switch>
       </div>
