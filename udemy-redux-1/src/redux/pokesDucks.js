@@ -3,8 +3,11 @@ import axios from 'axios'
 
 // constantes
 const dataInicial = {
-  array: [],
-  offset: 0
+  count: 0,
+  next: null,
+  previous:null,
+  results: []
+
 }
 //TYPES
 const OBTENER_POKEMONES_EXITO = 'OBTENER_POKEMONES_EXITO'
@@ -17,11 +20,11 @@ const ATRAS_POKEMONES_EXITO = 'ATRAS_POKEMONES_EXITO'
 export default function pokeReducer(state = dataInicial, action) {
   switch(action.type){
     case 'OBTENER_POKEMONES_EXITO':
-      return {...state, array: action.payload}
+      return {...state, ...action.payload}
     case 'SIGUIENTES_POKEMONES_EXITO':
-      return {...state, array: action.payload.array, offset: action.payload.offset}
+      return {...state, ...action.payload}
     case 'ATRAS_POKEMONES_EXITO':
-      return {...state, array: action.payload.array, offset: action.payload.offset}
+      return {...state, ...action.payload}
     default:
       return state  
   }
@@ -31,49 +34,39 @@ export default function pokeReducer(state = dataInicial, action) {
 //acciones
 export const obtenerPokemonesAccion = () => async(dispatch, getState) => {
 
-  const {offset} = getState().pokemones
-  const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`
+  const url = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`
   try {
     const res = await axios.get(url)
     dispatch({
       type: OBTENER_POKEMONES_EXITO,
-      payload: res.data.results
+      payload: res.data
     })
   } catch (error) {
     console.log(error)
   }
 }
 
-export const siguientePokemonAction = (numero) => async(dispatch, getState) => {
-  const {offset} = getState().pokemones
-  const siguiente = offset + numero
-  const url = `https://pokeapi.co/api/v2/pokemon?offset=${siguiente}&limit=20`
+export const siguientePokemonAction = () => async(dispatch, getState) => {
+
+  const { next } = getState().pokemones
   try {
-    const res = await axios.get(url)
+    const res = await axios.get(next)
     dispatch({
       type: SIGUIENTES_POKEMONES_EXITO,
-      payload: {
-        array: res.data.results,
-        offset: siguiente
-      }
+      payload: res.data
     })
   } catch (error) {
     console.error(error)
   }
 }
 
-export const atrasPokemonAction = (numero) => async(dispatch, getState) => {
-  const {offset} = getState().pokemones
-  const atras = offset - numero
-  const url = `https://pokeapi.co/api/v2/pokemon?offset=${atras}&limit=20`
+export const atrasPokemonAction = () => async(dispatch, getState) => {
+  const { previous } = getState().pokemones
   try {
-    const res = await axios.get(url)
+    const res = await axios.get(previous)
     dispatch({
       type: ATRAS_POKEMONES_EXITO,
-      payload: {
-        array: res.data.results,
-        offset: atras
-      }
+      payload: res.data
     })
   } catch (error) {
     console.error(error)

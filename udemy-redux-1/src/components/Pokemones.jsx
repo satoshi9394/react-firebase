@@ -12,7 +12,7 @@ from '../redux/pokesDucks'
 function Pokemones() {
   const dispatch = useDispatch()
 
-  const pokemones = useSelector(store => store.pokemones.array)
+  const pokemones = useSelector(store => store.pokemones.results)
   const offset = useSelector( store => store.pokemones.offset)
   
   return (
