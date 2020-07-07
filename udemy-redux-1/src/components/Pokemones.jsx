@@ -1,6 +1,11 @@
 import React  from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {obtenerPokemonesAccion} from '../redux/pokesDucks'
+import {
+  obtenerPokemonesAccion,
+  siguientePokemonAction,
+  atrasPokemonAction
+  } 
+from '../redux/pokesDucks'
 
 
 
@@ -8,14 +13,26 @@ function Pokemones() {
   const dispatch = useDispatch()
 
   const pokemones = useSelector(store => store.pokemones.array)
+  const offset = useSelector( store => store.pokemones.offset)
   
   return (
     <div>
       lista de pokemones
       <button
-      onClick={() => dispatch(obtenerPokemonesAccion())}
+        onClick={() => dispatch(obtenerPokemonesAccion())}
       >
         Get pokemones
+      </button>
+      <button
+        type='none'
+        onClick={ () => dispatch(atrasPokemonAction(20))}
+      >
+        Atras
+      </button>
+      <button
+        onClick={() => dispatch(siguientePokemonAction(20))}
+      >
+        Siguiente
       </button>
       <ul>
         {
