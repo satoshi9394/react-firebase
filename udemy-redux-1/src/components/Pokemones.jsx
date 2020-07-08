@@ -1,4 +1,4 @@
-import React  from 'react'
+import React, {useEffect}  from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {
   obtenerPokemonesAccion,
@@ -17,6 +17,14 @@ function Pokemones() {
 
   const pokemones = useSelector(store => store.pokemones.results)
   const {next, previous} = useSelector(store => store.pokemones)
+
+
+  useEffect(() =>{
+    const fetchData = () => {
+      dispatch(obtenerPokemonesAccion())
+    }
+    fetchData()
+  },[dispatch])
   
   return (
     <div className="row">
@@ -24,15 +32,6 @@ function Pokemones() {
         <h3>Lista de pokemones</h3>
         <br/>
         <div className="d-flex justify-content-between">
-          {
-            pokemones.length === 0 && 
-            <button
-              className="btn btn-dark"
-              onClick={() => dispatch(obtenerPokemonesAccion())}
-            >
-              Get pokemones
-            </button>
-          }
           {
             next &&
             <button
