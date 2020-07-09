@@ -1,12 +1,20 @@
-import React from 'react'
-import {useDispatch} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useDispatch, useSelector } from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 import {
   ingresoUsuarioAction
 } 
 from '../redux/usuarioDuck'
 
-function Login() {
+function Login(props) {
+  const loading = useSelector(store => store.usuario.loading)
+  const activo = useSelector(store => store.usuario.activo)
+  useEffect(() => {
+    if(activo){
+      props.history.push('/')
+    }
+  }, [activo, props ])
 
   const dispatch = useDispatch()
   return (
@@ -15,6 +23,7 @@ function Login() {
       <hr/>
       <button className="btn btn-dark"
         onClick={() => dispatch(ingresoUsuarioAction())}
+        disabled={loading}
         >
         Acceder
       </button>
@@ -22,4 +31,4 @@ function Login() {
   )
 }
 
-export default Login
+export default withRouter(Login)
