@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#contrasenas de la app de firebase
+/src/firebase.js
