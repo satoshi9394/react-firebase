@@ -27,31 +27,10 @@ function Pokemones() {
   },[dispatch])
   
   return (
-    <div className="row">
+    <div className="row mt-5">
       <div className="col-md-6">
         <h3>Lista de pokemones</h3>
-        <br/>
-        <div className="d-flex justify-content-between">
-          {
-            next &&
-            <button
-              className="btn btn-dark"
-              onClick={() => dispatch(siguientePokemonAction(20))}
-            >
-              Siguiente
-            </button>
-          }
-          {
-            previous &&
-            <button
-              className="btn btn-dark"
-              onClick={ () => dispatch(atrasPokemonAction(20))}
-            >
-              Atras
-            </button>
-          }
-        </div>
-        <ul className="list-group mt-3">
+        <ul className="list-group mt-4">
           {
             pokemones.map( item => (
               <li key={item.name} className="list-group-item text-uppercase">
@@ -66,6 +45,26 @@ function Pokemones() {
             ))
           }
         </ul>
+        <div className="d-flex justify-content-between mt-4">
+          {
+            next &&
+            <button
+              className="btn btn-dark"
+              onClick={() => dispatch(siguientePokemonAction())}
+            >
+              Siguiente
+            </button>
+          }
+          {
+            previous &&
+            <button
+              className="btn btn-dark"
+              onClick={ () => dispatch(atrasPokemonAction())}
+            >
+              Atras
+            </button>
+          }
+        </div>
       </div>
       <div className="col-md-6">
         <h3>Detalle pokemon</h3>
