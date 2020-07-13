@@ -1,7 +1,17 @@
 import React from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import {Link, NavLink, withRouter} from 'react-router-dom'
 
-function Navbar() {
+import { useDispatch } from 'react-redux'
+
+import {cerrarSesionAccion} from '../redux/usuarioDuck'
+
+function Navbar({history}) {
+
+  const dispatch = useDispatch()  
+  const cerrarSession = () => {
+    dispatch(cerrarSesionAccion())
+    history.push('/login')
+  }
   return (
     <div className="navbar navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
@@ -14,7 +24,9 @@ function Navbar() {
         <NavLink className="btn btn-dark mr-2" to="/login" exact>
           Login
         </NavLink>
-        <button className="btn btn-dark mr-2">
+        <button className="btn btn-dark mr-2"
+          onClick={() => cerrarSession()}
+        >
           Cerrar
         </button>
       </div>
@@ -22,4 +34,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default withRouter(Navbar)
