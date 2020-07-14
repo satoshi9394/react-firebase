@@ -10,9 +10,11 @@ import {
 import Pokemones from './components/Pokemones';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
+import Perfil from './components/Perfil';
 
 // Firebase
-import {auth} from './firebase'
+import {auth} from './firebase';
+
 
 
 function App() {
@@ -56,6 +58,7 @@ function App() {
         <Navbar/>
           <Switch>
             <RutaPrivada component={Pokemones} path="/" exact />
+            <RutaPrivada component={Perfil} path="/perfil" exact />
             <Route component={Login} path="/login" exact />
           </Switch>
       </div>

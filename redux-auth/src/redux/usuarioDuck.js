@@ -73,9 +73,10 @@ export const ingresoUsuarioAction = () => async(dispatch) => {
 
 export const leerUsuarioActivoAccion = () => (dispatch) => {
   if(localStorage.getItem('usuario')){
+    const usuario = JSON.parse(localStorage.getItem('usuario'))
     dispatch({
       type: USUARIO_EXITO,
-      payload: localStorage.getItem('usuario')
+      payload: usuario
     })
   }
 }
