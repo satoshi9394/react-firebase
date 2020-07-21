@@ -7,13 +7,17 @@ import Navbar from './components/Navbar';
 
 
 function App() {
-  const {saludo} = useContext(ChatContext)
-  return (
+  const {usuario} = useContext(ChatContext)
+  return usuario!== null ?(
     <div>
       <Navbar/>
-      Chat {saludo}
+      Chat 
     </div>
-  );
+  ) : (
+  <div>
+    Cargando...
+  </div>
+  )
 }
 
 export default App;
