@@ -29,8 +29,25 @@ function ChatProvider({children}) {
     })
   }
 
+  const ingresoUsuario =  async() => {
+    try {
+      await auth.signInWithPopup(provider)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const cerrarSesion = () => {
+    auth.signOut()
+  }
+
   return (
-    <ChatContext.Provider value={{usuario}}>
+    <ChatContext.Provider value={
+      {
+        usuario, 
+        ingresoUsuario, 
+        cerrarSesion,
+      }}>
       {children}
     </ChatContext.Provider>
   )
