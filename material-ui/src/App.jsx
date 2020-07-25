@@ -3,6 +3,7 @@ import React from 'react';
 //components UI
 import {
   Button,
+  IconButton,
 } from '@material-ui/core'
 //icons UI
 import {Delete} from '@material-ui/icons'
@@ -17,6 +18,9 @@ function App() {
         >
         Borrado
       </Button>
+      <IconButton aria-label="delete">
+        <Delete color='primary'/>
+      </IconButton>
     </div>
   );
 }
