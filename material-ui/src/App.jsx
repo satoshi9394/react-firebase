@@ -4,23 +4,25 @@ import React from 'react';
 import {
   Button,
   IconButton,
+  Typography
 } from '@material-ui/core'
 //icons UI
-import {Delete} from '@material-ui/icons'
+import {
+  Delete
+} from '@material-ui/icons'
 
 function App() {
   return (
     <div>
-      <Button 
-        variant='contained'
-        color="secondary"
-        startIcon={<Delete/>}
-        >
-        Borrado
-      </Button>
-      <IconButton aria-label="delete">
-        <Delete color='primary'/>
-      </IconButton>
+      <Typography variant="h1" color="primary" >
+        hola h1
+      </Typography>
+      <Typography variant="body1" color="secondary" align='center' >
+        lorem
+      </Typography>
+      <Typography variant="body1" color="primary" align='center'>
+        Lorem ipsum dolor, 
+      </Typography>
     </div>
   );
 }
