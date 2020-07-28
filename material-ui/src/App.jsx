@@ -3,7 +3,6 @@ import React from 'react';
 //components UI
 import {
   Button,
-  Typography
 } from '@material-ui/core'
 
 //theme from ui
@@ -12,7 +11,8 @@ import theme from './themaConfig'
 
 //components React
 import Navbar from './components/Navbar';
-
+import Listas from './components/Listas';
+import Oculto from './components/Oculto';
 
 
 function App() {
@@ -26,9 +26,8 @@ function App() {
       <Button  variant='contained' color='secondary'>
         Mi boton personalizado
       </Button>
-      <Typography variant="h4" color="initial">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi doloribus cupiditate natus blanditiis! Eveniet, molestiae.
-      </Typography>
+      <Listas/>
+      <Oculto/>
     </ThemeProvider>
   );
 }
