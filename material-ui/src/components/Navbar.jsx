@@ -11,39 +11,46 @@ import {
 
 import MenuIcon from '@material-ui/icons/Menu'
 
+const drawerWidth = 240
+
 const useStyles = makeStyles(theme => ({
-  offset: theme.mixins.toolbar,
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]:{
+      display: 'none',
+    },
   },
   title:{
     flexGrow: 1
+  },
+  appBar: {
+    [theme.breakpoints.up('sm')]:{
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    }
   }
 }))
 
 
-const Navbar = () => {
-  const {offset, menuButton, title} = useStyles()
+const Navbar = ({accionAbrir}) => {
+  const {menuButton, title, appBar} = useStyles()
   return (
-    <div>
-      <AppBar position="fixed" color="primary">
-        <Toolbar>
-          <IconButton aria-label="menu" color='inherit' 
-          className={menuButton}
-          >
-            <MenuIcon/>
-          </IconButton>
-          <Typography variant="h6" className={title}>
-            angel 
-          </Typography>
-          <Button variant='text' color='inherit'>
-            loging
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <div className={offset}>
-      </div>
-    </div>
+    <AppBar position="fixed" color="primary" className={appBar}>
+      <Toolbar>
+        <IconButton aria-label="menu" color='inherit' 
+        className={menuButton}
+        onClick={() => accionAbrir()}
+        >
+          <MenuIcon/>
+        </IconButton>
+        <Typography variant="h6" className={title}>
+          angel 
+        </Typography>
+        <Button variant='text' color='inherit'>
+          loging
+        </Button>
+      </Toolbar>
+    </AppBar>
   )
 }
 

@@ -29,7 +29,7 @@ const Listas = () => {
           <ListItemIcon>
             <Deck/>
           </ListItemIcon>
-          <ListItemText primary="mi segundo elemento" />
+          <ListItemText primary="mi segundo element" />
         </ListItem>
         <Divider/>
       </List>
