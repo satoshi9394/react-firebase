@@ -9,6 +9,7 @@ import {
 //components 
 import Navbar from './Navbar'
 import Cajon from './Cajon'
+import Cajita from './Cajita'
 
 const estilos = makeStyles(theme => ({
   root:{
@@ -50,7 +51,7 @@ const Contenedor = () => {
       </Hidden>
       <div className={content}>
         <div className={toolbar}></div>
-        contenido
+        <Cajita/>
       </div>
     </div>
   )
