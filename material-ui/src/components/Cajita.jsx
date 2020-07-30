@@ -2,39 +2,25 @@ import React from 'react'
 
 //Material UI
 import {
-  Box
+  Box,
+  Grid
 } from '@material-ui/core'
 
 const Cajita = () => {
   return (
     <div>
-      <Box
-        color='primary.main'
-      >
-        Lorem ipsum dolor sit, amet consectetur adipisicing.
-      </Box>
-      <Box
-        color='primary.contrastText'
-        bgcolor='primary.main'
-      >
-        Lorem ipsum dolor sit, amet consectetur adipisicing.
-      </Box>
-      <Box
-        color='primary.contrastText'
-        bgcolor='primary.main'
-        mt={2}
-        p={5}
-      >
-        Lorem ipsum dolor sit, amet consectetur adipisicing.
-      </Box>
-      <Box
-        m={2}
-        p={5}
-        border={2}
-        borderColor="error.main"
-      >
-        Lorem ipsum dolor sit, amet consectetur adipisicing.
-      </Box>
+      <Grid container>
+        <Grid item xs={12} sm={6} md={4}>
+          <Box border={2}>
+            xs12
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Box border={2}>
+            xs12
+          </Box>
+        </Grid>
+      </Grid>
     </div>
   )
 }
