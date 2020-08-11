@@ -3,7 +3,7 @@ import React from 'react'
 const VistaAdmin = () => {
   return (
     <div>
-      solo del administrador hola
+      solo del administrador holads
     </div>
   )
 }
