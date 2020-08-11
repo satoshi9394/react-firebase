@@ -8,7 +8,9 @@ const App = () => {
   return (
     <div>
       <Navbar/>
-      <VistaAdmin/>
+      <div className="container">
+        <VistaAdmin/>
+      </div>
     </div>
   )
 }
