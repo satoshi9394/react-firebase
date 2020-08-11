@@ -1,9 +1,14 @@
 import React from 'react'
 
+//components
+import Navbar from './components/Navbar'
+import VistaAdmin from './components/VistaAdmin'
+
 const App = () => {
   return (
     <div>
-      <h1>Hola mundo</h1>
+      <Navbar/>
+      <VistaAdmin/>
     </div>
   )
 }
